@@ -14,4 +14,8 @@ class Booking extends Model
         'status',
         'notes'
     ];
+
+    public function service(){
+        return $this->belongsTo(\App\Models\Service::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -22,6 +23,30 @@ class BookingController extends Controller
             'scheduled_at' => ['required', 'date', 'after:now'],
             'notes' => ['nullable', 'string', 'max:1000']
         ]);
+
+        $scheduled = Carbon::parse($validated['scheduled_at']);
+
+        $startTime = $scheduled->copy()->setTime(9, 0);
+        $endTime = $scheduled->copy()->setTime(19, 0);
+
+        if($scheduled->lt($startTime) || $scheduled->gte($endTime)) {
+            return back()
+            ->withInput()
+            ->withErrors([
+                'scheduled_at' => 'Please choose a time between 9:00 AM and 7:00 PM.'
+            ]);
+        }
+
+        $minutes = (int) $scheduled->format('i');
+        if($minutes % 60 !== 0){
+            return back()
+            ->withInput()
+            ->withErrors([
+                'scheduled_at' => 'Please choose a time in 1 hour intervals (e.g., 10:00, 11:00).'
+            ]);
+        }
+
+        $validated['scheduled_at'] = $scheduled->format('Y-m-d H:i:s');
 
         $alreadyTaken = Booking::where('scheduled_at', $validated['scheduled_at'])->exists();
         if($alreadyTaken){

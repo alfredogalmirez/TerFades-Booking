@@ -2,7 +2,8 @@
 
 @section('title', 'Admin - Bookings')
 
-@section('content')<div class="flex items-center justify-between mb-6">
+@section('content')
+<div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">Bookings</h1>
             <p class="text-gray-600 mt-1">Manage customer appointments.</p>
@@ -17,6 +18,12 @@
             <a href="/admin/bookings?status=cancelled"
                 class="px-3 py-2 rounded-lg border text-sm hover:bg-white">Cancelled</a>
         </div>
+
+        <form method="POST" action="/admin/logout">
+            @csrf
+            <button class="px-4 py-2 rounded-lg bg-gray-900 text-white text-sm hover:bg-black">Logout</button>
+        </form>
+
     </div>
 
     @if (session('success'))

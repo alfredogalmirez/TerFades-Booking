@@ -65,7 +65,8 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Date & Time</label>
-                        <input type="datetime-local" name="scheduled_at" value="{{ old('scheduled_at') }}" required step="3600"
+                        <input type="datetime-local" name="scheduled_at" value="{{ old('scheduled_at') }}" required
+                            step="3600"
                             class="w-full rounded-xl border-gray-300 focus:border-gray-900 focus:ring-gray-900 px-4 py-2">
                         <p class="text-xs text-gray-500 mt-2">Business hours: 9:00 AM–7:00 PM. Time slots are every 1 hour.
                     </div>
@@ -91,4 +92,4 @@
             <p class="text-center text-xs text-gray-500 mt-6">
                 Your booking will be marked as <span class="font-semibold">pending</span> until confirmed.
             </p>
- @endsection
+        @endsection

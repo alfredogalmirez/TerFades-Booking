@@ -23,19 +23,6 @@
                 @if (!Auth::check() || !Auth::user()->is_admin)
                     <a href="/book" class="hover:text-gray-300">Book Now</a>
                 @endif
-
-                @if (Auth::check() && Auth::user()->is_admin)
-                    <a href="/admin/bookings" class="hover:text-gray-300">Admin</a>
-
-                    <form method="POST" action="/admin/logout" class="inline">
-                        @csrf
-                        <button type="submit" class="hover:text-gray-300">
-                            Logout
-                        </button>
-                    </form>
-                @else
-                    <a href="/admin/login" class="hover:text-gray-300">Admin Login</a>
-                @endif
             </div>
         </div>
     </nav>

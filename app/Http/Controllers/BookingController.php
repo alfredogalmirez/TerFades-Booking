@@ -67,4 +67,23 @@ class BookingController extends Controller
         return redirect('/book')->with('success', 'Booking submitted! Please wait for cofirmation.');
     }
 
+    public function trackForm() {
+        return view('bookings.track');
+    }
+
+    public function trackResult(Request $request) {
+        $data = $request->validate([
+            'phone' => ['required', 'string', 'max:20'],
+        ]);
+
+        $bookings = Booking::with('service')
+        ->where('phone', $data['phone'])
+        ->orderBy('scheduled_at', 'desc')
+        ->get();
+
+        return view('bookings.track', [
+            'phone' => $data['phone'],
+            'bookings' => $bookings,
+        ]);
+    }
 }

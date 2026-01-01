@@ -16,12 +16,23 @@
     <!-- Navbar -->
     <nav class="bg-gray-900 text-white shadow">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="/" class="text-xl font-bold tracking-wide">
-                💈 Ter Fades
+            <a href="{{ Auth::check() && Auth::user()->is_admin ? '/admin/bookings' : '/' }}"
+                class="text-xl font-bold tracking-wide">
+                Ter Fades
             </a>
             <div class="space-x-6 text-sm">
-                @if (!Auth::check() || !Auth::user()->is_admin)
+                @if (Auth::check() && Auth::user()->is_admin)
+                    <a href="/admin/bookings" class="hover:text-gray-300">Booking List</a>
+                    <a href="/admin/services" class="hover:text-gray-300">Services</a>
+
+                    <form action="/admin/logout" method="POST" class="inline">
+                        @csrf
+                        <button>Log out</button>
+                    </form>
+                @else
+                    <a href="/" class="hover:text-gray-300">Home</a>
                     <a href="/book" class="hover:text-gray-300">Book Now</a>
+                    <a href="/track" class="hover:text-gray-300">Track Booking</a>
                 @endif
             </div>
         </div>

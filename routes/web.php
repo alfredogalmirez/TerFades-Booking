@@ -40,3 +40,4 @@ Route::middleware(['admin'])->group(function () {
     Route::delete('/admin/services/{service}', [ServiceAdminController::class, 'delete']);
 });
 
+Route::get('/slots', [BookingController::class, 'availableSlots']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class BookingAdminController extends Controller
 {
@@ -24,10 +25,23 @@ class BookingAdminController extends Controller
 
     public function updateStatus(Request $request, Booking $booking){
         $validated = $request->validate([
-            'status' => ['required', 'in:pending,confirmed,done,cancelled'],
+            'status' => ['required', 'in:pending,confirmed,in_progress,done,cancelled'],
         ]);
 
-        $booking->update(['status' => $validated['status']]);
+        $newStatus = $validated['status'];
+
+        if($newStatus === 'confirmed' && is_null($booking->queue_no)){
+            $date = Carbon::parse($booking->scheduled_at)->toDateString();
+
+            $maxQueue = Booking::whereDate('scheduled_at', $date)
+            ->whereNotNull('queue_no')
+            ->max('queue_no');
+
+            $booking->queue_no = ($maxQueue ?? 0) + 1;
+        }
+
+        $booking->status = $newStatus;
+        $booking->save();
 
         return back()->with('success', 'Booking status updated.');
     }

@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QueueController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\BookingAdminController;
 use App\Http\Controllers\Admin\ServiceAdminController;
-use App\Http\Controllers\AdminAuthController;
-use App\Models\Service;
 
 Route::get('/', function () {
     $services = Service::where('is_active', true)->orderBy('name')->get();
@@ -41,3 +42,5 @@ Route::middleware(['admin'])->group(function () {
 });
 
 Route::get('/slots', [BookingController::class, 'availableSlots']);
+
+Route::get('/queue', [QueueController::class, 'index']);

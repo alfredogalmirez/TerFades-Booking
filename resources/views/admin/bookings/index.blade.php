@@ -40,6 +40,7 @@
                         <th class="text-left px-4 py-3">Schedule</th>
                         <th class="text-left px-4 py-3">Phone</th>
                         <th class="text-left px-4 py-3">Status</th>
+                        <th class="text-left px-4 py-3">Queue #</th>
                         <th class="text-left px-4 py-3">Notes</th>
                         <th class="text-left px-4 py-3">Actions</th>
                     </tr>
@@ -68,6 +69,9 @@
                                     {{ ucfirst($booking->status) }}
                                 </span>
                             </td>
+                            <td class="px-4 py-3">
+                                {{ $booking->queue_no ?? '-' }}
+                            </td>
                             <td class="px-4 py-3 text-gray-600">
                                 {{ $booking->notes ?? '—' }}
                             </td>
@@ -79,6 +83,7 @@
                                     <select name="status" class="rounded-lg border-gray-300 text-sm">
                                         <option value="pending" @selected($booking->status === 'pending')>Pending</option>
                                         <option value="confirmed" @selected($booking->status === 'confirmed')>Confirmed</option>
+                                        <option value="in_progress" @selected($booking->status === 'in_progress')>In Progress</option>
                                         <option value="done" @selected($booking->status === 'done')>Done</option>
                                         <option value="cancelled" @selected($booking->status === 'cancelled')>Cancelled</option>
                                     </select>

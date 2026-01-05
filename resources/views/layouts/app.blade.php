@@ -32,6 +32,7 @@
                 @else
                     <a href="/" class="hover:text-gray-300">Home</a>
                     <a href="/book" class="hover:text-gray-300">Book Now</a>
+                    <a href="/queue" class="hover:text-gray-300">Queue</a>
                     <a href="/track" class="hover:text-gray-300">Track Booking</a>
                 @endif
             </div>

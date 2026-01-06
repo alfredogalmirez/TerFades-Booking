@@ -24,11 +24,7 @@
         </div>
     </div>
 
-    @if (session('success'))
-        <div class="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-700">
-            {{ session('success') }}
-        </div>
-    @endif
+    <x-flash-message type="success" />
 
     <div class="bg-white shadow rounded-2xl border overflow-hidden">
         <div class="overflow-x-auto">
@@ -46,6 +42,14 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y">
+                    @php
+                        $colors = [
+                            'pending' => 'bg-yellow-100 text-yellow-800',
+                            'confirmed' => 'bg-blue-100 text-blue-800',
+                            'done' => 'bg-green-100 text-green-800',
+                            'cancelled' => 'bg-red-100 text-red-800',
+                        ];
+                    @endphp
                     @forelse ($bookings as $booking)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 py-3 font-medium text-gray-900">{{ $booking->customer_name }}</td>
@@ -54,16 +58,6 @@
                                 {{ \Carbon\Carbon::parse($booking->scheduled_at)->format('M d, Y h:i A') }}
                             </td>
                             <td class="px-4 py-3">{{ $booking->phone }}</td>
-
-                            @php
-                                $colors = [
-                                    'pending' => 'bg-yellow-100 text-yellow-800',
-                                    'confirmed' => 'bg-blue-100 text-blue-800',
-                                    'done' => 'bg-green-100 text-green-800',
-                                    'cancelled' => 'bg-red-100 text-red-800',
-                                ];
-                            @endphp
-
                             <td class="px-4 py-3">
                                 <span class="px-2 py-1 rounded-lg text-xs border {{ $colors[$booking->status] ?? '' }}">
                                     {{ ucfirst($booking->status) }}

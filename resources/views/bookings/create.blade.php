@@ -11,11 +11,7 @@
 
             <div class="bg-white shadow-lg rounded-2xl p-6 md:p-8 border border-gray-100">
 
-                @if (session('success'))
-                    <div class="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-700">
-                        <strong class="font-semibold">Success!</strong> {{ session('success') }}
-                    </div>
-                @endif
+                <x-flash-message type="success" />
 
                 @if ($errors->any())
                     <div class="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700">
@@ -121,7 +117,7 @@
                         try {
                             const res = await fetch(
                                 `/slots?service_id=${encodeURIComponent(serviceId)}&date=${encodeURIComponent(date)}`
-                                );
+                            );
                             const slots = await res.json();
 
                             if (!Array.isArray(slots) || slots.length === 0) {

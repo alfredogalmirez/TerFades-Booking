@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Haircut Booking System')</title>
+    <title>{{ $title ?? 'Haircut Booking System' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 @php
@@ -42,7 +42,7 @@
     <!-- Main content -->
     <main class="flex-1">
         <div class="max-w-3xl mx-auto px-6 py-10">
-            @yield('content')
+            {{ $slot }}
         </div>
     </main>
 

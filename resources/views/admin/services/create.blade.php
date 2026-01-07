@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Add Service')
-
-@section('content')
+<x-layout title="Add Service">
 <div class="flex items-center justify-between mb-6">
     <div>
         <h1 class="text-3xl font-bold text-gray-900">Add Service</h1>
@@ -59,4 +55,4 @@
         </div>
     </form>
 </div>
-@endsection
+</x-layout>

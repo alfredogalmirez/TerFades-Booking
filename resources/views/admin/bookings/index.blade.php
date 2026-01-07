@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Admin - Bookings')
-
-@section('content')
+<x-layout title="Admin - Bookings">
     <div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-3xl font-bold text-gray-900">Bookings</h1>
@@ -103,4 +99,4 @@
             {{ $bookings->links() }}
         </div>
     </div>
-@endsection
+</x-layout>

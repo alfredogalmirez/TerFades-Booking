@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Admin - Services')
-
-@section('content')
+<x-layout title="Admin - Services">
 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
     <div>
         <h1 class="text-3xl font-bold text-gray-900">Services</h1>
@@ -76,4 +72,4 @@
         </table>
     </div>
 </div>
-@endsection
+</x-layout>

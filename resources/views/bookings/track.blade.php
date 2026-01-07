@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Track Booking')
-
-@section('content')
+<x-layout title="Track Booking">
 @php
     $colors = [
         'pending' => 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -83,4 +79,4 @@
         @endif
     </div>
 @endif
-@endsection
+</x-layout>

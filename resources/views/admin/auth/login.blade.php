@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Admin Login')
-
-@section('content')
+<x-layout title="Admin Login">
     <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow">
         <h2 class="text-2xl font-bold mb-4">Admin Login</h2>
 
@@ -29,4 +25,4 @@
             </button>
         </form>
     </div>
-@endsection
+</x-layout>

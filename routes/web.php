@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\BookingAdminController;
 use App\Http\Controllers\Admin\ServiceAdminController;
+use App\Http\Controllers\AdminUserController;
 
 Route::get('/', function () {
     $services = Service::where('is_active', true)->orderBy('name')->get();
@@ -26,7 +27,7 @@ Route::get('/track', [BookingController::class, 'trackForm']);
 Route::post('/track', [BookingController::class, 'trackResult']);
 
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/bookings', [BookingAdminController::class, 'index']);
     Route::post('/admin/bookings/{booking}/status', [BookingAdminController::class, 'updateStatus']);
     Route::patch('/admin/bookings/{booking}/status', [BookingAdminController::class, 'updateStatus']);
@@ -39,6 +40,9 @@ Route::middleware(['admin'])->group(function () {
     Route::patch('/admin/services/{service}', [ServiceAdminController::class, 'update']);
 
     Route::delete('/admin/services/{service}', [ServiceAdminController::class, 'delete']);
+
+    Route::get('/admin/users/create', [AdminUserController::class, 'create']);
+    Route::post('/admin/users', [AdminUserController::class, 'store']);
 });
 
 Route::get('/slots', [BookingController::class, 'availableSlots']);

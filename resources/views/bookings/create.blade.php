@@ -27,7 +27,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">Service</label>
                 <select name="service_id" id="service_id" required
                     class="w-full rounded-xl border-gray-300 focus:border-gray-900 focus:ring-gray-900 px-4 py-2">
-                    <option value="">-- Choose a service --</option>
+                    <option value="" disabled selected hidden>Choose a service</option>
                     @foreach ($services as $service)
                         <option value="{{ $service->id }}" @selected(old('service_id') == $service->id)>
                             {{ $service->name }} ({{ $service->duration_minutes }} mins)
@@ -65,7 +65,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-1">Time Slot</label>
                 <select name="time" id="time" required
                     class="w-full rounded-xl border-gray-300 focus:border-gray-900 focus:ring-gray-900 px-4 py-2">
-                    <option value="">-- Select a date first --</option>
+                    <option value="" disabled selected hidden>Select a date first</option>
                 </select>
                 <p class="text-xs text-gray-500 mt-2">Slots are every 60 minutes</p>
             </div>
@@ -105,7 +105,7 @@
                 timeEl.innerHTML = `<option value="">Loading slots...</option>`;
 
                 if (!serviceId || !date) {
-                    timeEl.innerHTML = `<option value="">-- Select service and date --</option>`;
+                    timeEl.innerHTML = `<option value="" disabled selected hidden>Select service and date</option>`;
                     return;
                 }
 
@@ -120,7 +120,7 @@
                         return;
                     }
 
-                    timeEl.innerHTML = `<option value="">-- Choose a time --</option>`;
+                    timeEl.innerHTML = `<option value="" disabled selected hidden>Choose a time</option>`;
                     for (const s of slots) {
                         const opt = document.createElement('option');
                         opt.value = s.value; // "09:30"

@@ -24,6 +24,7 @@
                 @if (Auth::check() && Auth::user()->is_admin)
                     <a href="/admin/bookings" class="hover:text-gray-300">Booking List</a>
                     <a href="/admin/services" class="hover:text-gray-300">Services</a>
+                    <a href="/admin/users/create" class="hover:text-gray-300">Add Admin</a>
 
                     <form action="/admin/logout" method="POST" class="inline">
                         @csrf
